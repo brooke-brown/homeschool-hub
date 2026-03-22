@@ -1,0 +1,84 @@
+{
+  "name": "StudySession",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Session title"
+    },
+    "subject": {
+      "type": "string",
+      "description": "Subject being studied"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the session"
+    },
+    "time": {
+      "type": "string",
+      "description": "Start time of the session"
+    },
+    "duration": {
+      "type": "number",
+      "description": "Duration in minutes"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "one_on_one",
+        "group"
+      ],
+      "description": "Session type"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "virtual",
+        "local"
+      ],
+      "description": "Virtual or in-person"
+    },
+    "creator_email": {
+      "type": "string",
+      "description": "Creator's email"
+    },
+    "creator_name": {
+      "type": "string",
+      "description": "Creator's name"
+    },
+    "invited_emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Emails of invited parents"
+    },
+    "description": {
+      "type": "string",
+      "description": "Session description"
+    }
+  },
+  "required": [
+    "title",
+    "subject",
+    "date",
+    "time",
+    "duration",
+    "type",
+    "creator_email",
+    "creator_name"
+  ],
+  "rls": {
+    "create": {
+      "data.creator_email": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "data.creator_email": "{{user.email}}"
+    },
+    "delete": {
+      "data.creator_email": "{{user.email}}"
+    }
+  }
+}
