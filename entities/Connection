@@ -1,0 +1,71 @@
+{
+  "name": "Connection",
+  "type": "object",
+  "properties": {
+    "sender_email": {
+      "type": "string",
+      "description": "Email of parent who sent the request"
+    },
+    "sender_name": {
+      "type": "string",
+      "description": "Name of parent who sent the request"
+    },
+    "receiver_email": {
+      "type": "string",
+      "description": "Email of parent receiving the request"
+    },
+    "receiver_name": {
+      "type": "string",
+      "description": "Name of parent receiving the request"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "accepted",
+        "declined"
+      ],
+      "default": "pending",
+      "description": "Status of the connection request"
+    },
+    "message": {
+      "type": "string",
+      "description": "Optional message with the request"
+    }
+  },
+  "required": [
+    "sender_email",
+    "sender_name",
+    "receiver_email",
+    "receiver_name",
+    "status"
+  ],
+  "rls": {
+    "create": {
+      "data.sender_email": "{{user.email}}"
+    },
+    "read": {
+      "$or": [
+        {
+          "data.sender_email": "{{user.email}}"
+        },
+        {
+          "data.receiver_email": "{{user.email}}"
+        }
+      ]
+    },
+    "update": {
+      "data.receiver_email": "{{user.email}}"
+    },
+    "delete": {
+      "$or": [
+        {
+          "data.sender_email": "{{user.email}}"
+        },
+        {
+          "data.receiver_email": "{{user.email}}"
+        }
+      ]
+    }
+  }
+}
