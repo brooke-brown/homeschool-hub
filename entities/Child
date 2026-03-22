@@ -1,0 +1,48 @@
+{
+  "name": "Child",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Child's first name"
+    },
+    "age": {
+      "type": "number",
+      "description": "Child's age"
+    },
+    "grade": {
+      "type": "string",
+      "description": "Child's grade level"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Subjects the child wants to study"
+    },
+    "parent_email": {
+      "type": "string",
+      "description": "Parent's email for linking"
+    }
+  },
+  "required": [
+    "name",
+    "age",
+    "grade",
+    "subjects",
+    "parent_email"
+  ],
+  "rls": {
+    "create": {
+      "data.parent_email": "{{user.email}}"
+    },
+    "read": {},
+    "update": {
+      "data.parent_email": "{{user.email}}"
+    },
+    "delete": {
+      "data.parent_email": "{{user.email}}"
+    }
+  }
+}
